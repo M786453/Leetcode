@@ -18,15 +18,11 @@ class Solution:
         while i < len(s):
 
             if i < len(s) - 1 and roman_int_dict[s[i]] < roman_int_dict[s[i+1]]:
-                print(f'{s[i]}{s[i+1]}:',roman_int_dict[s[i+1]] - roman_int_dict[s[i]])
                 res += roman_int_dict[s[i+1]] - roman_int_dict[s[i]]
                 i += 1 # Skip next roman numeral
             else:
-                print(f'{s[i]}:', roman_int_dict[s[i]])
                 res += roman_int_dict[s[i]]
 
             i += 1
 
         return res
-
-print(Solution().romanToInt('MCMXCIV'))
