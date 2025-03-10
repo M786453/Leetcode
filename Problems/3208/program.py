@@ -7,16 +7,28 @@ def numberOfAlternatingGroups(colors, k):
 
     length = len(colors)
 
-    colors += colors
+    ag_counter = 0
 
-    alternating_groups_counter = 0
+    # Total Time Complexity: n*k
+    for start in range(length): # Time complexity: n
 
-    for start in range(length):
-        end = start + k
-        if (colors[start] == colors[start-1] and colors[start] == colors[start+1]) \
-            or (colors[end] == colors[end-1] and colors[end] == colors[end+1]):
-            alternating_groups_counter += 1
+        
+        if start+k > length:
+            end = (start+k) - length
+            ag = colors[start:] + colors[:end]
+        else:
+            end = start+k
+            ag = colors[start:end]
+        
+        is_ag = True
+        for i in range(k-1): # Time complexity: k
+            if ag[i] == ag[i+1]:
+                is_ag = False
+                break
+        
+        if is_ag:
+            ag_counter += 1
 
-    return alternating_groups_counter
+    return ag_counter
 
-print("Answer:",numberOfAlternatingGroups(colors = [0,1,0,1,0], k = 3))
+print("Answer:",numberOfAlternatingGroups( colors = [1,1,0,1], k = 4))
