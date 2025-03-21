@@ -8,17 +8,11 @@ def minOperations(nums):
 
     i = 0
 
-    are_all_one = True
-
     while i < (len(nums) - 2):
 
         if nums[i] == 1:
             i += 1
-            if nums[i] == 1:
-                i +=1
-                if nums[i] == 1:
-                    i += 1
-            continue # Skip next executions
+            continue 
 
         nums[i] = int(bool(nums[i] == 0))
 
@@ -26,16 +20,15 @@ def minOperations(nums):
 
         nums[i+2] = int(bool(nums[i+2] == 0))
 
-        if nums[i] == 0:
-            are_all_one = False
-
         operations += 1
 
-    if are_all_one:
-        if nums[len(nums)-2] == 0 or nums[len(nums)-1] == 0:
-            are_all_one = False
+        i += 1
 
-    if are_all_one:
-        return operations
-    else:
+    if nums[len(nums)-2] == 0 or nums[len(nums)-1] == 0:
         return -1
+    else:
+        return operations
+    
+print("Answer:", minOperations(nums = [0,1,1,1,0,0]))
+
+print("Answer:", minOperations(nums = [0,1,1,1]))
