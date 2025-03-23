@@ -11,19 +11,32 @@ def create_linked_list(given_list):
 
         if linked_list:
 
-            node = linked_list.next
-            while node:
-                print(node.val)
+            node = linked_list
+
+            while node.next:
                 node = node.next
             
-            node = ListNode(n, None)
-
-            print(node.val)
+            node.next = ListNode(n, None)
 
         else:
-    
             linked_list = ListNode(n, None)
-            
+
+    return linked_list
+
+def add_element(val, linked_list):
+
+    if linked_list:
+
+        node = linked_list
+
+        while node.next:
+            node = node.next
+        
+        node.next = ListNode(val, None)
+
+    else:
+        linked_list = ListNode(val, None)
+
     return linked_list
 
 def print_linked_list(linked_list):
@@ -31,36 +44,54 @@ def print_linked_list(linked_list):
     node = linked_list
 
     while node:
-        print(node.val, end="")
+        print(node.val, end=" ")
         node = node.next
-        print(node)
     
 def mergeTwoLists(list1, list2):
 
-    merged_list = []
+    list1 = create_linked_list(list1)
+
+    list2 = create_linked_list(list2)
+
+    merged_list = None
     
-    while list1 and list2:
+    while list1 or list2:
 
-        if list1[0] == list2[0]:
+        if list1 and list2:
+            
+            if list1.val == list2.val:
 
-            merged_list.append(list1.pop(0))
-            merged_list.append(list2.pop(0))
+
+                merged_list = add_element(list1.val, merged_list)
+                merged_list = add_element(list2.val, merged_list)
+
+
+                list1 = list1.next
+                list2 = list2.next
         
-        elif list1[0] < list2[0]:
+            elif list1.val < list2.val:
 
-            merged_list.append(list1.pop(0))
-        
+                merged_list = add_element(list1.val, merged_list)
+                list1 = list1.next
+
+            elif list2.val < list1.val:
+
+                merged_list = add_element(list2.val, merged_list)
+                list2 = list2.next
+            
         else:
 
-            merged_list.append(list2.pop(0))
+            if list1:
+                merged_list = add_element(list1.val, merged_list)
+                list1 = list1.next
+            else:
+                merged_list = add_element(list2.val, merged_list)
+                list2 = list2.next
+                
 
     return merged_list
 
-# print("Answer:", mergeTwoLists(list1 = [1,2,4], list2 = [1,3,4]))
-
-linked_list = create_linked_list([1,2,4,5])
-
-# print_linked_list(linked_list)
+print_linked_list(mergeTwoLists(list1 = [], list2 = [0,1,2,3]))
 
 
 
