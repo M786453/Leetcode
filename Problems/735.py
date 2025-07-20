@@ -5,33 +5,23 @@ class Solution(object):
         :rtype: List[int]
         """
         
-        stack = []
+        st = []
 
-        i = 0
+        for a in asteroids:
 
-        while i < len(asteroids)-1:
+            while st and a < 0 < st[-1]:
 
-            stack.append(asteroids[i])
+                if -a > st[-1]:
+                    st.pop()
+                    continue
+                elif -a == st[-1]:
+                    st.pop()
+                break
 
-            print("Index:", i)
-            print("Stack:", stack)
-            print("Asteroids:", asteroids)
-
-            if (stack[-1] < 0 and asteroids[i+1] > 0) or (stack[-1] > 0 and asteroids[i+1] < 0):
-                
-                if abs(stack[-1]) < abs(asteroids[i+1]):
-                    stack.pop()
-                elif abs(stack[-1]) == abs(asteroids[i+1]):
-                    stack.pop()
-                    i += 1
-
-
-            print("Stack C:", stack)
-            print("")
-                
-            i += 1
+            else:
+                st.append(a)    
         
-        return stack
+        return st
     
 if __name__ == "__main__":
 
