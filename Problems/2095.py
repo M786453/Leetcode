@@ -64,11 +64,42 @@ class Solution(object):
 
             node = node.next
 
-head = ListNode(1)
+class Solution2(object):
+    def deleteMiddle(self, head : ListNode):
+        """
+        :type head: Optional[ListNode]
+        :rtype: Optional[ListNode]
+        """
 
-ss = Solution()
+        if not head or not head.next:
+            return None
 
-ss.deleteMiddle(head=head)
+        prev, slow, fast = None, head, head
+
+        while fast and fast.next:
+
+            prev = slow
+
+            slow = slow.next
+            
+            fast = fast.next.next
+        
+        if prev:
+            prev.next = slow.next
+
+        return head
+
+head = ListNode(2, ListNode(1))
+
+ss = Solution2()
+
+node = ss.deleteMiddle(head=head)
+
+while node:
+
+    print(node.val)
+
+    node = node.next
 
 
         
