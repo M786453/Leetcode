@@ -30,7 +30,7 @@ class Solution(object):
 
         return curr
 
-# linked_list = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
+linked_list = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
 
 # ss = Solution()
 
