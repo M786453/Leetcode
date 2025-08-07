@@ -9,6 +9,7 @@ class TreeNode:
     
 class Solution:
 
+    # DFS
     def maxDepth(self, root):
 
         if root is None:
