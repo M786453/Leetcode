@@ -11,28 +11,28 @@ class Solution:
 
     def goodNodes(self, root):
 
-        count = 0
+        self.count = 0
+        self.max_val = float('-inf')
 
-        if root is None:
-            return count
-
-        def dfs(root, max_val, count):
+        def dfs(root):
 
             if root is None:
-                return count
+                return
             
-            if root.val >= max_val:
-                max_val = root.val
-                count += 1
+            old_max = self.max_val
 
-            count = dfs(root.left, max_val, count)
-            count = dfs(root.right, max_val, count)
+            if root.val >= self.max_val:
+                self.max_val = root.val
+                self.count += 1
 
-            return count
+            dfs(root.left)
+            dfs(root.right)
+
+            self.max_val = old_max
         
-        count = dfs(root, float('-inf'), count)
+        dfs(root)
         
-        return count
+        return self.count
     
 ss = Solution()
 
