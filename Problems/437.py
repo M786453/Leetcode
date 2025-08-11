@@ -12,38 +12,31 @@ class Solution(object):
 
     def pathSum(self, root, targetSum):
 
-        self.q = deque()
-        self.targetSum = targetSum
         self.count = 0
+        prefix_sum_count = {0: 1}  # base case: one way to have sum 0
 
-        def dfs(root):
-
-            if root is None:
+        def dfs(node, current_sum):
+            if not node:
                 return
-            
-            self.q.append(root.val)
+            # update current sum
+            current_sum += node.val
 
-            old_q = deque(self.q)
+            # check if there is a subpath ending here that sums to target
+            self.count += prefix_sum_count.get(current_sum - targetSum, 0)
 
-            print("sum:", sum(self.q))
+            # update hashmap
+            prefix_sum_count[current_sum] = prefix_sum_count.get(current_sum, 0) + 1
 
-            while self.q and sum(self.q) > self.targetSum:
+            # recurse
+            dfs(node.left, current_sum)
+            dfs(node.right, current_sum)
 
-                self.q.popleft()
+            # backtrack
+            prefix_sum_count[current_sum] -= 1
 
-            if self.q and sum(self.q) == self.targetSum:
-                self.count += 1
-
-            dfs(root.left)
-            if old_q:
-                old_q.pop()
-            dfs(root.right)
-
-            self.q = old_q
-        
-        dfs(root)
-        
+        dfs(root, 0)
         return self.count
+        
 
 if __name__ == "__main__":
 
