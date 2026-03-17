@@ -7,14 +7,32 @@ class Solution(object):
         :rtype: int
         """
 
-        for i in range(len(nums)):
+        start = 0
 
-            if nums[i] == target:
-                return i
-            elif i == len(nums)-1 and target > nums[i]:
-                return i+1
-            elif target > nums[i] and  target < nums[i+1]:
-                return i+1
+        end = len(nums)
+
+        mid = end // 2
+
+        while start < end:
+
+            print("Start:", start)
+            print("End:", end)
+            print("Mid:", mid)
+
+            if nums[mid] == target:
+                return mid
+            elif target > nums[mid] and mid+1 < len(nums) and target < nums[mid+1]:
+                return mid + 1
+            
+            if target > nums[mid]:
+                start = mid
+            else:
+                end = mid
+
+            mid = start + (end - start)//2
+
+            # break
+            
 
 s = Solution()
 
